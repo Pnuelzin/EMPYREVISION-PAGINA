@@ -118,6 +118,10 @@ img {
     width: auto;
 }
 
+.nav {
+    margin-left: auto;
+}
+
 .nav-list {
     display: flex;
     gap: 50px;
