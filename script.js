@@ -109,5 +109,77 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    // --- Contact Form Modal Logic ---
+    const modal = document.getElementById('contact-modal');
+    const openFormBtns = document.querySelectorAll('.open-form-btn');
+    const closeModalBtn = document.querySelector('.close-modal');
+    const contactForm = document.getElementById('contact-form');
+    const planInput = document.getElementById('selected-plan');
+    const extraField = document.getElementById('extra-field');
+
+    openFormBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const plan = btn.getAttribute('data-plan');
+            planInput.value = plan;
+            
+            // Show extra field if Personalized
+            if (plan === 'Personalizado') {
+                extraField.style.display = 'block';
+                document.getElementById('needs').required = true;
+            } else {
+                extraField.style.display = 'none';
+                document.getElementById('needs').required = false;
+            }
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Stop scroll
+        });
+    });
+
+    const closeForm = () => {
+        modal.style.display = 'none';
+        document.body.style.overflow = ''; // Restore scroll
+    };
+
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeForm);
+    }
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeForm();
+        }
+    });
+
+    // --- Form Submission (WhatsApp Integration) ---
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const plan = planInput.value;
+            const needs = document.getElementById('needs').value;
+            
+            // Format message for WhatsApp
+            let message = `Olá, meu nome é ${name}.%0A%0A`;
+            message += `Estou interessado no *Plano ${plan}*.%0A%0A`;
+            message += `*Detalhes do Contato:*%0A`;
+            message += `- Email: ${email}%0A`;
+            message += `- Telefone: ${phone}%0A`;
+            
+            if (plan === 'Personalizado' && needs) {
+                message += `%0A*Minhas Necessidades:*%0A${needs}`;
+            }
+            
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=5584986800555&text=${message}`;
+            
+            // Redirect to WhatsApp
+            window.open(whatsappUrl, '_blank');
+            closeForm();
+            contactForm.reset();
+        });
+    }
 
 });

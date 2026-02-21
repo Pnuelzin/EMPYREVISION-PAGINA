@@ -895,7 +895,7 @@ img {
 
 .footer-brand .footer-logo {
     margin-bottom: 20px;
-    height: 40px;
+    height: 120px;
 }
 
 .footer-brand .footer-tagline {
@@ -1011,16 +1011,95 @@ img {
     }
 }
 
+/* Modal & Form Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    margin: 50px auto;
+    padding: 40px;
+    border: 1px solid var(--gold);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+}
+
+.close-modal {
+    color: var(--text-white);
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.close-modal:hover {
+    color: var(--gold);
+}
+
+.modern-form .form-group {
+    margin-bottom: 20px;
+}
+
+.modern-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--text-gray);
+}
+
+.modern-form input,
+.modern-form textarea {
+    width: 100%;
+    padding: 12px;
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-white);
+    border-radius: 8px;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.modern-form input:focus,
+.modern-form textarea:focus {
+    border-color: var(--gold);
+    outline: none;
+}
+
+.modern-form input[readonly] {
+    background: #1a1a1a;
+    color: var(--gold);
+    font-weight: bold;
+}
+
+.btn-full {
+    width: 100%;
+}
+
 /* Utilities for Animations */
 .fade-in,
 .fade-in-up,
 .fade-in-right {
     opacity: 0;
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.fade-in {
-    /* Just opacity */
 }
 
 .fade-in-up {
