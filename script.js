@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             const plan = btn.getAttribute('data-plan');
             planInput.value = plan;
-            
+
             // Show extra field if Personalized
             if (plan === 'Personalizado') {
                 extraField.style.display = 'block';
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 extraField.style.display = 'none';
                 document.getElementById('needs').required = false;
             }
-            
+
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden'; // Stop scroll
         });
@@ -155,26 +155,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
+
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
+
             const plan = planInput.value;
             const needs = document.getElementById('needs').value;
-            
+
             // Format message for WhatsApp
             let message = `Olá, meu nome é ${name}.%0A%0A`;
             message += `Estou interessado no *Plano ${plan}*.%0A%0A`;
             message += `*Detalhes do Contato:*%0A`;
             message += `- Email: ${email}%0A`;
-            message += `- Telefone: ${phone}%0A`;
-            
+
+
             if (plan === 'Personalizado' && needs) {
                 message += `%0A*Minhas Necessidades:*%0A${needs}`;
             }
-            
+
             const whatsappUrl = `https://api.whatsapp.com/send?phone=5584986800555&text=${message}`;
-            
+
             // Redirect to WhatsApp
             window.open(whatsappUrl, '_blank');
             closeForm();
